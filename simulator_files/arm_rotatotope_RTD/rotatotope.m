@@ -129,6 +129,12 @@ classdef rotatotope
                             A = [c, 0, s; 0, offset, 0; -s, 0, c];
                         case 3
                             A = [c, -s, 0; s, c, 0; 0, 0, offset];
+                        case -1
+                            A = [offset, 0, 0; 0, c, -s; 0, s, c]' ;
+                        case -2
+                            A = [c, 0, s; 0, offset, 0; -s, 0, c]' ;
+                        case -3
+                            A = [c, -s, 0; s, c, 0; 0, 0, offset]' ;
                     end
                 otherwise
                     error('Computed an invalid dimension from Z');
