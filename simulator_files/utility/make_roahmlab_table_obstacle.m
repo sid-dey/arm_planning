@@ -1,4 +1,4 @@
-function [table_cell] = make_roahmlab_table_obstacle(xy_location)
+function [table_cell] = make_roahmlab_table_obstacle(xy_location, z_height)
 % cabinet_cell = make_roahmlab_cabinet_obstacle(xy_location)
 %
 % Creates a cell array of box_obstacle_zonotopes that mimic Cabinet 3 in
@@ -9,11 +9,21 @@ function [table_cell] = make_roahmlab_table_obstacle(xy_location)
 % Created: 26 Jan 2020
 % Updated: no
 
-    if nargin < 1
-        xy_location = [0;0] ;
-    end
+%     if nargin < 1
+%         xy_location = [0;0] ;
+%     end
+% 
+%     table_height = 0.67;
 
-    table_height = 0.67;
+    switch nargin
+        case 2
+            table_height = z_height ; %height of table provided
+        case 1
+            table_height = 0.67; %height of table not provided. Set to default value.
+        otherwise
+            xy_location = [0; 0] ;
+            table_height = 0.67 ;
+    end
 
     table_top = box_obstacle_zonotope('center', [0; 0; table_height],...
         'side_lengths', [0.7620 2.0320 1.75*0.0254]);
