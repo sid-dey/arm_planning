@@ -38,7 +38,8 @@ for i = 1:length(c_IC) % we're going to loop over all velocity intervals
 %     const g:
 %     options.R0 = zonotope([options.x0, diag([0, 0, g, g_IC, 0])]); 
     % change g depdending on IC:
-    options.R0 = zonotope([options.x0, diag([0, 0, max(pi/24, abs(c_IC(i)/3)), g_IC, 0])]);
+%     options.R0 = zonotope([options.x0, diag([0, 0, max(pi/24, abs(c_IC(i)/3)), g_IC, 0])]);
+    options.R0 = zonotope([options.x0, diag([0, 0, pi/48, g_IC, 0])]); % done to make tighter JRS and, in turn, FRS.
     
     options.timeStep = dt;
     options.taylorTerms=5; %number of taylor terms for reachable sets
@@ -79,6 +80,7 @@ for i = 1:length(c_IC) % we're going to loop over all velocity intervals
     
     % save this FRS
     my_c_IC = c_IC(i);
-    filename = sprintf('FRS_trig/trig_FRS_%0.3f.mat', my_c_IC);
+%     filename = sprintf('FRS_trig/trig_FRS_%0.3f.mat', my_c_IC);
+    filename = sprintf('JRS_small/trig_FRS_%0.3f.mat', my_c_IC);
     save(filename, 'Rcont', 'options', 'L', 't_plan', 't_total', 'my_c_IC');
 end
