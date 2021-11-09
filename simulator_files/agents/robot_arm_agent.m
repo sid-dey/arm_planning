@@ -548,8 +548,8 @@ classdef robot_arm_agent < multi_link_agent
             A.input = zeros(A.n_inputs,1) ;
             A.input_time = 0 ;
             
-            % reset LLC
-            if isa(A.LLC,'arm_PID_LLC')
+            % reset PID LLC
+            if isa(A.LLC,'robot_arm_PID_LLC')
                 A.vdisp('Resetting low-level controller integrator error.',3)
                 A.LLC.position_error_state = zeros(length(A.joint_state_indices),1) ;
             end
